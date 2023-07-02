@@ -1,11 +1,11 @@
 import './App.css'
-import PokeCity from './components/PokeCity'
+import Bienvenida from './components/Bienvenida'
 
 function App() {
-    
+
     return (
         <>
-            <PokeCity />
+            <Bienvenida />
         </>
     )
 }
