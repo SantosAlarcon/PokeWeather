@@ -1,0 +1,52 @@
+#pokecity__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: .5em .5em 3.5em #0003;
+    border-radius: 2.5em;
+    width: 450px;
+    height: 650px;
+    margin: 0 auto;
+    padding: 1.5em;
+    background-color: #0006;
+    background-size: cover;
+    background-blend-mode: hue;
+}
+
+#pokecity__cabecera {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+#pokecity__ciudad {
+    font-size: 3.25em;
+}
+
+#pokecity__weather {
+    font-size: 1.25em;
+}
+
+#pokecity__currtemp {
+    font-size: 7em;
+}
+
+#pokecity__minmaxtemp {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    filter: brightness(1);
+}
+
+#pokecity__mintemp, #pokecity__maxtemp {
+    font-size: 1.75em;
+}
+
+#pokecity__mintemp {
+    color: #c2c2ff;
+}
+
+#pokecity__maxtemp {
+    color: #ffffa1;
+}
