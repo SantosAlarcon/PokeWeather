@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import "../styles/Loader.css"
 
 import castformNormal from "/Castform.webp"
@@ -29,7 +29,7 @@ const Loader = () => {
         <div id="pokecity__loader">
             <img src={castform} alt="castform" />
             <h2>Cargando...</h2>
-            <h6>Castform está recopilando los datos meteorológicos de la ciudad introducida...</h6>
+            <h5>Castform está recopilando los datos meteorológicos de la ciudad introducida...</h5>
         </div>
     )
 }

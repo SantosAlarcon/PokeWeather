@@ -1,11 +1,13 @@
 import './App.css'
-import Bienvenida from './components/Bienvenida'
+import { Toaster } from 'sonner'
+import Main from './components/Main'
 
 function App() {
 
     return (
         <>
-            <Bienvenida />
+            <Main />
+            <Toaster richColors />
         </>
     )
 }

@@ -1,34 +1,29 @@
 import { useEffect, useState, useRef } from "react";
 
-const useFetch = async (url: string) => {
+const useFetch = (url: string) => {
     const [error, setError] = useState<string>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const datosRef = useRef();
-    let datos: object;
+    let datos: object = {};
 
-    useEffect(() => {
-        const obtenerDatos = async () => {
-
-            setIsLoading(true);
-
-            try {
-                const resultados = await fetch(url)
-                datos = await resultados.json();
-            } catch {
-                setError("Error al obtener los datos")
-            } finally {
-                setIsLoading(false);
-
-                if(!datosRef.current) {
-                    datosRef.current = datos;
-                }
+    const fetchData = async () => {
+        try {
+            const respuesta: any | undefined = await fetch(url);
+            datos = await respuesta.json();
+            if (!datosRef.current) {
+                datosRef.current = datos;
             }
+        } catch {
+            setError("Error al obtener los datos")
+        } finally {
+            setIsLoading(false);
         }
+    }
 
-        obtenerDatos();
-    }, []);
+    fetchData();
 
-    return { datosRef, error, isLoading };
+    //return { datosRef, error, isLoading };
+    return datosRef.current;
 }
 
 export default useFetch;

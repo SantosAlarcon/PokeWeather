@@ -6,41 +6,56 @@ import useFetch from '../hooks/useFetch';
 import Loader from './Loader';
 import devolverFondo from '../utils/devolverFondo';
 import devolverColor from '../utils/devolverColor';
+import { useGlobalStore } from '../store/useGlobalStore';
+import datos from "../mock/datos.json"
+import devolverTiempo from '../utils/devolverTiempo';
 
 const PokeCity = () => {
-    const [datos, setDatos] = useState<object>();
-    const [fondo, setFondo] = useState();
-    useFetch(`https://api.openweathermap.org/data/2.5/forecast?q=Ciudad+Real&appid=${import.meta.env.VITE_APIKEY}&units=metric`).then(res => setDatos(res.datosRef.current));
+    // Se recupera la variable de la ciudad en el estado global
+    const ciudad: any = useGlobalStore((state: unknown) => state.ciudad);
 
-    const [tiempoCiudad, setTiempoCiudad] = useState<TiempoCiudad>({
-        nombre: "Ciudad Real",
-        temp_actual: 35.0,
-        temp_max: 31.0,
-        temp_min: 18.0,
-        weather: Weather.Clear,
-        vel_viento: 2.5,
-        dir_viento: 12
-    });
+    // Se recuperan los datos de la ciudad y su función del estado global
+    const [datosCiudad, cambiarDatosCiudad] = useGlobalStore((state: unknown) => [state.datosCiudad, state.cambiarDatosCiudad]);
+
+    const [fondo, setFondo] = useState<string>();
+    const [tiempoCiudad, setTiempoCiudad] = useState<TiempoCiudad>(datos[0]);
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${import.meta.env.VITE_APIKEY}&units=metric`
+
+    //useFetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${import.meta.env.VITE_APIKEY}&units=metric`).then(res => cambiarDatosCiudad(res));
+    //const datos = useFetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${import.meta.env.VITE_APIKEY}&units=metric`);
 
     useEffect(() => {
+        const fetchData = async () => {
+            const url_datos = await fetch(url).then(res => res.json());
+            if (url_datos) {
+                cambiarDatosCiudad(url_datos);
+            }
 
-        if (datos) { 
-            setTiempoCiudad({
-                nombre: datos.city.name,
-                temp_actual: datos.list[0].main.temp,
-                temp_max: datos.list[0].main.temp_max,
-                temp_min: datos.list[0].main.temp_min,
-                weather: Weather.Clear,
-                vel_viento: datos.list[0].wind.speed,
-                dir_viento: datos.list[0].wind.deg,
-            })
-            setFondo(devolverFondo(tiempoCiudad.temp_actual));
         }
-    }, [datos])
+
+        fetchData();
+
+    }, [cambiarDatosCiudad])
+
+    useEffect(() => {
+        if (datosCiudad) {
+            setFondo(devolverFondo(datosCiudad.main.temp));
+            setTiempoCiudad({
+                nombre: datosCiudad.name,
+                temp_actual: datosCiudad.main.temp,
+                temp_max: datosCiudad.main.temp_max,
+                temp_min: datosCiudad.main.temp_min,
+                weather: devolverTiempo(datosCiudad.weather[0].main),
+                vel_viento: datosCiudad.wind.speed,
+                dir_viento: datosCiudad.wind.deg,
+            })
+        }
+    }, [datosCiudad])
 
     return (
         <>
-            {!datos ? (<Loader />) : (
+            {!datosCiudad ? (<Loader />) : (
                 <div id="pokecity__container"
                     style={{
                         backgroundImage: `url(${fondo})`,

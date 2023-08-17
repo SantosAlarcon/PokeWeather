@@ -1,7 +1,7 @@
 {
   "name": "pokeweather",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0b",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,29 +11,28 @@
     "test": "jest"
   },
   "dependencies": {
-    "cities.json": "^1.1.22",
+    "cities.json": "^1.1.23",
     "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sonner": "^0.5.0",
+    "sonner": "^0.6.2",
     "ts-node": "^10.9.1",
-    "zustand": "^4.3.8"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@jest/globals": "^29.5.0",
-    "@types/dotenv": "^8.2.0",
-    "@types/jest": "^29.5.2",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
+    "@jest/globals": "^29.6.2",
+    "@types/jest": "^29.5.3",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "eslint": "^8.43.0",
+    "eslint": "^8.47.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.5",
-    "jest": "^29.5.0",
+    "jest": "^29.6.2",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
-    "vite": "^4.3.9"
+    "vite": "^4.4.9"
   }
 }

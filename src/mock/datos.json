@@ -1,0 +1,11 @@
+[
+    {
+        "nombre": "Madrid",
+        "temp_actual": 31.5,
+        "temp_min": 19.2,
+        "temp_max": 34.5,
+        "weather": "Clear",
+        "vel_viento": 2.5,
+        "dir_viento": 12
+    }
+]

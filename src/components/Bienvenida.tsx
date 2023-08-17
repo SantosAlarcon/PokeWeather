@@ -2,29 +2,28 @@ import { useState } from 'react'
 import castform from "/Castform.webp"
 import "../styles/Bienvenida.css"
 import cities from "cities.json"
-import { Toaster, toast } from 'sonner'
+import { toast } from 'sonner'
 import { useGlobalStore } from '../store/useGlobalStore'
-import PokeCity from './PokeCity'
 
 const Bienvenida = () => {
     const [ciudad, setCiudad] = useState<string>("");
-    const [ciudadActual, cambiarCiudad] = useGlobalStore(state => [state.ciudad, state.cambiarCiudad]);
+    const [cambiarCiudad] = useGlobalStore(state => [state.cambiarCiudad]);
 
     const handleForm = (e: Event) => {
         e.preventDefault();
 
-        if (cities.find(city => city.name === ciudad)) {
+        // Si la ciudad se encuentra en la lista del cities.json, se cambiará la
+        // ciudad en el estado global y acto seguido pasará a la interfaz principal.
+        if (cities.find((city: any) => city.name === ciudad)) {
             cambiarCiudad(ciudad);
         } else {
             toast.error("La ciudad no está en la lista");
+            setCiudad("");
         }
-
-        setCiudad("");
     }
 
     return (
         <>
-            {ciudadActual === "" ? (
             <div id="pokeweather__main">
                 <img src={castform} alt="logo" />
                 <h1>PokeWeather</h1>
@@ -37,10 +36,7 @@ const Bienvenida = () => {
                         <button type="submit">Enviar</button>
                     </form>
                 </div>
-                <Toaster richColors />
             </div>
-            ) : (<PokeCity />)
-            }
         </>
     )
 }
